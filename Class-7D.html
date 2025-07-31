@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Class 7D – SMPN 8 Tambun Selatan</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Website kelas 7D SMPN 8 Tambun Selatan – materi, latihan soal, game edukatif, dan ranking.">
+  <meta name="keywords" content="kelas 7D, SMPN 8 Tambun Selatan, matematika, IPA, IPS, prakarya">
+  <meta name="author" content="¿ZeroGravity?">
+  <meta name="theme-color" content="#001122">
+  <link rel="icon" href="School-Logo.ico">
+  <link rel="manifest" href="assets/manifest.json">
+  <style>
+    /* ===== SAME STYLES AS BEFORE (dipendekkan agar ringkas) ===== */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--c1:#001122;--c2:#0f0f23;--c3:#ff0055;--c4:#00ffaa;--c5:#7700ff;--c6:#ffaa00;--c7:#0088ff;--c8:#fff;--c9:#000011;--font:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;--shadow:0 0 15px rgba(0,255,170,.4),0 0 30px rgba(0,255,170,.2)}
+    body{font-family:var(--font);background:linear-gradient(135deg,var(--c1),var(--c2));color:var(--c8);overflow-x:hidden;min-height:100vh;animation:bgShift 15s infinite linear}
+    @keyframes bgShift{0%{filter:hue-rotate(0deg)}50%{filter:hue-rotate(180deg)}100%{filter:hue-rotate(360deg)}}
+    .school-logo{width:100px;height:100px;background:url('School-Logo.png') center/cover;margin:0 auto 20px;border-radius:50%;box-shadow:0 0 30px var(--c7),0 0 60px var(--c7);animation:logoSpin 4s infinite linear}
+    @keyframes logoSpin{0%{transform:rotateY(0deg)}100%{transform:rotateY(360deg)}}
+    .header{position:relative;padding:40px 20px;text-align:center;background:radial-gradient(ellipse at center,var(--c5),var(--c2));box-shadow:var(--shadow)}
+    .header h1{font-size:3.5em;background:linear-gradient(90deg,var(--c3),var(--c4),var(--c5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:textPulse 2s infinite}
+    @keyframes textPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+    .nav-container{position:sticky;top:0;z-index:999;background:rgba(0,0,0,.4);backdrop-filter:blur(15px);padding:15px}
+    .nav-menu{display:flex;justify-content:center;gap:15px;flex-wrap:wrap}
+    .nav-btn{position:relative;padding:15px 35px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--c3),var(--c5));color:#fff;font-weight:700;font-size:14px;cursor:pointer;overflow:hidden;transition:all .4s}
+    .nav-btn::before{content:"";position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,.2);border-radius:50%;transition:all .4s}
+    .nav-btn:hover::before{top:-50%;left:-50%;width:200%;height:200%}
+    .nav-btn:hover{transform:translateY(-5px) scale(1.08);box-shadow:0 10px 30px var(--c3)}
+    .content-section{display:none;padding:50px 20px;max-width:1200px;margin:auto}
+    .content-section.active{display:block;animation:fadeIn .6s}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    .subject-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px}
+    .subject-card{position:relative;padding:40px;border-radius:20px;background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 0 30px rgba(0,255,170,.2);transition:all .4s;cursor:pointer}
+    .subject-card:hover{transform:translateY(-15px) rotateX(5deg);box-shadow:0 15px 40px var(--c4)}
+    .question-container{background:linear-gradient(135deg,#111,#222);padding:30px;border-radius:15px;box-shadow:0 0 20px var(--c4)}
+    .game-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
+    .game-card{background:linear-gradient(135deg,var(--c1),var(--c2));padding:30px;border-radius:20px;text-align:center;cursor:pointer;transition:.4s}
+    .game-card:hover{transform:scale(1.1);box-shadow:0 0 30px var(--c5)}
+    .snake-game{width:420px;height:420px;margin:20px auto;background:#000;border:3px solid var(--c4);display:grid;grid-template-columns:repeat(21,1fr)}
+    .tic-tac-toe{display:grid;grid-template-columns:repeat(3,100px);gap:5px;margin:20px auto}
+    .tic-tac-toe-cell{width:100px;height:100px;background:#222;border:2px solid var(--c4);display:flex;align-items:center;justify-content:center;font-size:2.5em;cursor:pointer}
+    .memory-game{display:grid;grid-template-columns:repeat(6,70px);gap:10px;margin:20px auto}
+    .memory-card{width:70px;height:70px;background:linear-gradient(135deg,var(--c3),var(--c5));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:2em;color:#fff;cursor:pointer;transition:.4s;transform-style:preserve-3d}
+    .memory-card.flipped{transform:rotateY(180deg);background:#fff;color:#111}
+    .modal{display:none;position:fixed;z-index:2000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,.8);backdrop-filter:blur(10px)}
+    .modal-content{background:linear-gradient(135deg,#111,#222);margin:5% auto;padding:40px;border-radius:20px;width:90%;max-width:900px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow)}
+    .close{float:right;font-size:40px;cursor:pointer;color:var(--c8)}
+    .footer{background:#000;text-align:center;padding:40px;font-size:.9em}
+    .particle{position:absolute;width:5px;height:5px;background:var(--c4);border-radius:50%;animation:float 12s infinite linear}
+    @keyframes float{0%{transform:translateY(100vh) rotate(0deg);opacity:1}100%{transform:translateY(-100vh) rotate(720deg);opacity:0}}
+    @media(max-width:768px){.nav-menu{flex-direction:column}.header h1{font-size:2.2em}.subject-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<noscript>
+  <div style="background:#ff0055;color:#fff;padding:30px;text-align:center">
+    <h2>⚠️ JavaScript Diperlukan</h2>
+    <p>Silakan aktifkan JavaScript di browser Anda untuk menggunakan fitur lengkap website ini.</p>
+  </div>
+</noscript>
+
+<header class="header">
+  <div class="school-logo"></div>
+  <h1>🎓 Class 7D – SMPN 8 Tambun Selatan</h1>
+</header>
+
+<nav class="nav-container">
+  <div class="nav-menu">
+    <button class="nav-btn" onclick="showSection('home')">🏠 Beranda</button>
+    <button class="nav-btn" onclick="showSection('pelajaran')">📚 Materi</button>
+    <button class="nav-btn" onclick="showSection('subjects')">📝 Latihan Soal</button>
+    <button class="nav-btn" onclick="showSection('games')">🎮 Permainan</button>
+    <button class="nav-btn" onclick="showSection('friends')">👥 Teman</button>
+    <button class="nav-btn" onclick="showSection('ranking')">👑 Ranking</button>
+    <button class="nav-btn" onclick="showSection('stats')">📊 Statistik</button>
+    <button class="nav-btn" onclick="showSection('feedback')">💬 Feedback</button>
+    <button class="nav-btn" onclick="showSection('contact')">📞 Contact</button>
+  </div>
+</nav>
+
+<main>
+  <!-- HOME -->
+  <section id="home" class="content-section active">
+    <div style="text-align:center">
+      <h2 style="font-size:2.5em;margin-bottom:30px">Selamat Datang di Class 7D! 🌌</h2>
+      <div class="subject-grid">
+        <div class="subject-card">
+          <h3>📖 Motivasi Hari Ini</h3>
+          <p>"Aku Bisa, Pasti Bisa, Harus Bisa" – SMPN 8 Tambun Selatan</p>
+          <button class="nav-btn" onclick="showSection('subjects')">Mulai Belajar</button>
+        </div>
+        <div class="subject-card">
+          <h3>📅 Jadwal Pelajaran</h3>
+          <button class="nav-btn" onclick="openModal(`
+            <h3>Jadwal Pelajaran</h3>
+            <ul>
+              <li><strong>Senin:</strong> Bahasa Indonesia, PAI, IPS</li>
+              <li><strong>Selasa:</strong> IPA, Matematika, Seni & Prakarya, Bahasa Indonesia</li>
+              <li><strong>Rabu:</strong> Matematika, Bahasa Sunda, IPA, PPKn</li>
+              <li><strong>Kamis:</strong> Penjaskes, PPKn, Informatika</li>
+              <li><strong>Jumat:</strong> Matematika, Seni & Prakarya, PPKn, Bahasa Inggris</li>
+            </ul>
+          `)">Lihat Jadwal</button>
+        </div>
+        <div class="subject-card">
+          <h3>🏆 Prestasi Kelas</h3>
+          <p>Andika Pratama – Juara Kelas Minggu Ini!</p>
+          <button class="nav-btn" onclick="showSection('ranking')">👑 Ranking</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBJECTS / QUIZ -->
+  <section id="subjects" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">📚 Semua Mata Pelajaran dan Soal Latihan</h2>
+    <div class="subject-grid" id="subjects-grid"></div>
+  </section>
+
+  <section id="practice" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">📝 Latihan Soal</h2>
+    <div id="question-area" class="question-container">
+      <p style="color:#aaa">Pilih mata pelajaran untuk memulai kuis 10 soal.</p>
+    </div>
+  </section>
+
+  <!-- GAMES -->
+  <section id="games" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">🎮 Permainan Edukatif</h2>
+    <div class="game-container">
+      <div class="game-card" onclick="startGame('snake')"><h3>🐍 Snake 3D</h3></div>
+      <div class="game-card" onclick="startGame('tictactoe')"><h3>❌⭕ Tic-Tac-Toe</h3></div>
+      <div class="game-card" onclick="startGame('memory')"><h3>🧠 Memory 5D</h3></div>
+    </div>
+  </section>
+
+  <!-- FRIENDS -->
+  <section id="friends" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">👥 Teman-Teman</h2>
+    <div class="subject-grid" id="friends-grid"></div>
+  </section>
+
+  <!-- RANKING -->
+  <section id="ranking" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">👑 Ranking Kelas 7D</h2>
+    <div class="subject-grid" id="ranking-grid"></div>
+  </section>
+
+  <!-- PELAJARAN -->
+  <section id="pelajaran" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">📚 Belajar</h2>
+    <div class="subject-grid" id="pelajaran-grid"></div>
+  </section>
+
+  <!-- MATA PELAJARAN -->
+  <section id="matematika" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">🔢 Matematika</h2>
+    <button class="nav-btn" onclick="openModal(`
+      <h2>🔢 Matematika Kelas 7</h2>
+      <iframe width='100%' height='400' src='https://www.youtube.com/embed/videoseries?list=PLQ9FlBQFe_MmUq0EnRcU6f9FMQrzYxOT-' frameborder='0' allowfullscreen></iframe>
+    `)">🔢 Matematika</button>
+  </section>
+
+  <section id="bahasa-inggris" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">🇬🇧 Bahasa Inggris</h2>
+    <button class="nav-btn" onclick="openModal(`
+      <h2>🇬🇧 Bahasa Inggris</h2>
+      <iframe width='100%' height='400' src='https://www.youtube.com/embed/videoseries?list=PL6E8cGDJ2xeAaNzL_vKqjpMKhHhmRIMnI' frameborder='0' allowfullscreen></iframe>
+    `)">🇬🇧 Bahasa Inggris</button>
+  </section>
+
+  <section id="bahasa-indonesia" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">🇮🇩 Bahasa Indonesia</h2>
+    <button class="nav-btn" onclick="openModal(`
+      <h2>🇮🇩 Bahasa Indonesia</h2>
+      <iframe width='100%' height='400' src='https://www.youtube.com/embed/videoseries?list=PL6E8cGDJ2xeAQR3F1fnVW_G1MTegY4aWL' frameborder='0' allowfullscreen></iframe>
+    `)">🇮🇩 Bahasa Indonesia</button>
+  </section>
+
+  <section id="ilmu-pengetahuan-sosial" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">🗺 Ilmu Pengetahuan Sosial</h2>
+    <button class="nav-btn" onclick="openModal(`
+      <h2>🗺 IPS</h2>
+      <iframe width='100%' height='400' src='https://www.youtube.com/embed/videoseries?list=PL6E8cGDJ2xeCRWajlU9kYDKroO5H4qHUH' frameborder='0' allowfullscreen></iframe>
+    `)">🗺 IPS</button>
+  </section>
+
+  <section id="ilmu-pengetahuan-alam" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">🪐 Ilmu Pengetahuan Alam</h2>
+    <button class="nav-btn" onclick="openModal(`
+      <h2>🪐 IPA</h2>
+      <iframe width='100%' height='400' src='https://www.youtube.com/embed/videoseries?list=PL6E8cGDJ2xeCw1VjAvZPe7jZee2psXbxJ' frameborder='0' allowfullscreen></iframe>
+    `)">🪐 IPA</button>
+  </section>
+
+  <section id="agama" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">☪️ Agama Islam</h2>
+    <button class="nav-btn" onclick="openModal(`
+      <h2>☪️ PAI</h2>
+      <iframe width='100%' height='400' src='https://www.youtube.com/embed/videoseries?list=PL6E8cGDJ2xeCGxOjeRUe9AIrmWde-Hq6W' frameborder='0' allowfullscreen></iframe>
+    `)">☪️ Agama Islam</button>
+  </section>
+
+  <section id="seni-rupa-dan-prakarya" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">🗿 Seni Dan Prakarya</h2>
+    <button class="nav-btn" onclick="openModal(`
+      <h2>🗿 Prakarya</h2>
+      <iframe width='100%' height='400' src='https://www.youtube.com/embed/videoseries?list=PL6E8cGDJ2xeCRQATw2xrR4h3B1sSLVQCu' frameborder='0' allowfullscreen></iframe>
+    `)">🗿 Seni Dan Prakarya</button>
+  </section>
+
+  <section id="pendidikan-pancasila" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">🏢 Pendidikan Pancasila</h2>
+    <button class="nav-btn" onclick="openModal(`
+      <h2>🏢 PPKN</h2>
+      <iframe width='100%' height='400' src='https://www.youtube.com/embed/videoseries?list=PL6E8cGDJ2xeBlacCsstHgQeet8uHYjnUb' frameborder='0' allowfullscreen></iframe>
+    `)">🏢 PPKN</button>
+  </section>
+
+  <section id="informatika" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">🖥 Informatika</h2>
+    <button class="nav-btn" onclick="openModal(`
+      <h2>🖥 Informatika</h2>
+      <iframe width='100%' height='400' src='https://www.youtube.com/embed/videoseries?list=PL6E8cGDJ2xeA1yM1DLbgG6PWunWJCsFnb' frameborder='0' allowfullscreen></iframe>
+    `)">🖥 Informatika</button>
+  </section>
+  
+    <!-- CONTACT -->
+  <section id="contact" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">📞 Contact</h2>
+    <div class="subject-grid" id="contact-grid"></div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">📊 Statistik Kelas</h2>
+    <div class="subject-grid">
+      <div class="subject-card"><h3>👥 Siswa Online</h3><p id="visitor-count">0</p></div>
+      <div class="subject-card"><h3>✅ Soal Terjawab</h3><p id="questions-answered">0</p></div>
+      <div class="subject-card"><h3>🎮 Game Diselesaikan</h3><p id="games-played">0</p></div>
+    </div>
+  </section>
+
+  <!-- FEEDBACK -->
+  <section id="feedback" class="content-section">
+    <h2 style="text-align:center;margin-bottom:30px">💬 Kirim Feedback</h2>
+    <div class="question-container">
+      <form onsubmit="sendFeedback(event)">
+        <label>Nama:</label><br>
+        <input type="text" id="fb-name" required style="padding:10px;width:100%;border-radius:10px;border:none;margin-bottom:15px"><br>
+        <label>Kritik/Saran:</label><br>
+        <textarea id="fb-text" required placeholder="Tulis kritik atau saran Anda di sini..."></textarea><br>
+        <button type="submit" class="nav-btn">Kirim Feedback</button>
+      </form>
+      <div id="fb-result" style="margin-top:15px"></div>
+   </div>
+  </section>
+</main>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>Website Create BY=¿ZeroGravity?</p>
+  <p>Website Powered BY=SMPN 8 Tambun Selatan</p>
+  <p>&copy; 2025/2026 Class 7D – All Rights Reserved</p>
+</footer>
+
+<script>
+/* ===== 10 SOAL PER MATA PELAJARAN ===== */
+const questions = {
+  /* --- M A T E M A T I K A --- */
+  matematika: [
+    {q:'8 + 7 = ?',a:'15',exp:'8 + 7 = 15'},
+    {q:'9 × 6 = ?',a:'54',exp:'9 × 6 = 54'},
+    {q:'100 ÷ 4 = ?',a:'25',exp:'100 ÷ 4 = 25'},
+    {q:'15 - 9 = ?',a:'6',exp:'15 - 9 = 6'},
+    {q:'7 × 8 = ?',a:'56',exp:'7 × 8 = 56'},
+    {q:'36 ÷ 6 = ?',a:'6',exp:'36 ÷ 6 = 6'},
+    {q:'13 + 27 = ?',a:'40',exp:'13 + 27 = 40'},
+    {q:'45 - 28 = ?',a:'17',exp:'45 - 28 = 17'},
+    {q:'12 × 5 = ?',a:'60',exp:'12 × 5 = 60'},
+    {q:'81 ÷ 9 = ?',a:'9',exp:'81 ÷ 9 = 9'}
+  ],
+
+  /* --- B A H A S A   I N D O N E S I A --- */
+  bahasa: [
+    {q:'Sinonim "cepat"?',a:'laju',exp:'Cepat sinonimnya laju'},
+    {q:'Antonim "besar"?',a:'kecil',exp:'Antonim besar = kecil'},
+    {q:'Tanda akhir kalimat pernyataan?',a:'titik',exp:'Titik'},
+    {q:'Arti "harmonis"?',a:'selaras',exp:'Selaras'},
+    {q:'Kata kerja contohnya?',a:'lari',exp:'Lari adalah kata kerja'},
+    {q:'Peribahasa "bagai kancil dan buaya" artinya?',a:'cerdik vs kuat',exp:'Menggambarkan kecerdikan melawan kekuatan'},
+    {q:'Majas perumpamaan contohnya?',a:'seperti',exp:'Menggunakan kata seperti atau bagai'},
+    {q:'Huruf kapital digunakan saat?',a:'awal kalimat',exp:'Huruf besar di awal kalimat atau nama'},
+    {q:'Kalimat majemuk contohnya?',a:'Aku datang dan dia pergi',exp:'Menggabungkan dua kalimat'},
+    {q:'Pantun terdiri dari?',a:'sampiran dan isi',exp:'Baris 1-2 sampiran, 3-4 isi'}
+  ],
+
+  /* --- I P A --- */
+  ipa: [
+    {q:'Planet terdekat Matahari?',a:'Merkurius',exp:'Merkurius'},
+    {q:'Fungsi akar?',a:'menyerap air',exp:'Menyerap air & mineral'},
+    {q:'Hewan penghasil madu?',a:'lebah',exp:'Lebah'},
+    {q:'Jumlah tulang dewasa?',a:'206',exp:'206 tulang'},
+    {q:'Proses penguapan air?',a:'evaporasi',exp:'Evaporasi'},
+    {q:'Planet ketiga dari Matahari?',a:'Bumi',exp:'Bumi adalah planet ketiga'},
+    {q:'Zat hijau daun?',a:'klorofil',exp:'Klorofil untuk fotosintesis'},
+    {q:'Alat pernapasan?',a:'paru-paru',exp:'Paru-paru manusia'},
+    {q:'Planet terbesar?',a:'Jupiter',exp:'Jupiter adalah gas raksasa'},
+    {q:'Satelit alami Bumi?',a:'Bulan',exp:'Bulan satelit alami'}
+  ],
+
+  /* --- I P S --- */
+  ips: [
+    {q:'Ibu kota Indonesia?',a:'Jakarta',exp:'Jakarta'},
+    {q:'Benua terbesar?',a:'Asia',exp:'Asia'},
+    {q:'Mata uang Indonesia?',a:'Rupiah',exp:'Rupiah'},
+    {q:'Negara tetangga timur?',a:'Papua Nugini',exp:'Papua Nugini'},
+    {q:'Monumen Jakarta?',a:'Monas',exp:'Monas'},
+    {q:'Presiden pertama?',a:'Ir. Soekarno',exp:'Soekarno'},
+    {q:'Jumlah provinsi?',a:'38',exp:'38 provinsi'},
+    {q:'Sungai terpanjang dunia?',a:'Nil',exp:'Sungai Nil'},
+    {q:'Laut terbesar?',a:'Pasifik',exp:'Lautan Pasifik'},
+    {q:'Ibu kota Jawa Barat?',a:'Bandung',exp:'Bandung'}
+  ],
+
+  /* --- A G A M A  (PAI) --- */
+  agama: [
+    {q:'Apa yang dimaksud dengan rukun iman?',a:'Rukun iman adalah pilar keyakinan dalam Islam',exp:'Rukun iman adalah pilar keyakinan dalam Islam, terdiri dari 6 perkara: iman kepada Allah, malaikat, kitab suci, rasul, hari akhir, dan qada/qadar.'},
+    {q:'Sebutkan 5 rukun Islam!',a:'Syahadat, shalat, zakat, puasa Ramadhan, dan haji',exp:'Syahadat, shalat, zakat, puasa Ramadhan, dan haji'},
+    {q:'Apa nama kitab suci umat Islam?',a:'Al-Qur’an',exp:'Al-Qur’an adalah kitab suci bagi umat islam'},
+    {q:'Siapa Nabi terakhir dalam Islam?',a:'Nabi Muhammad SAW',exp:'Nabi Muhammad SAW adalah nabi terakhir yang wajib diketahui oleh umat islam'},
+    {q:'Apa hukum melaksanakan shalat dalam Islam?',a:'Fardhu',exp:'Fardhu (wajib) bagi setiap muslim yang baligh dan berakal.'},
+    {q:'Apa yang dimaksud dengan surah Makkiyah?',a:'Surah dalam Al-Qur’an yang turun sebelum Nabi Muhammad hijrah ke Madinah',exp:'Surah dalam Al-Qur’an yang turun sebelum Nabi Muhammad hijrah ke Madinah'},
+    {q:'Sebutkan 2 hari raya dalam Islam!',a:'Idul Fitri dan Idul Adha',exp:'Idul Fitri dan Idul Adha'},
+    {q:'Apa nama malaikat yang bertugas menyampaikan wahyu?',a:'Malaikat Jibril',exp:'Malaikat Jibril adalah Malaikat yang menyampaikan wahyu'},
+    {q:'Apa pengertian dari zakat fitrah?',a:'Zakat wajib yang diberikan pada bulan Ramadhan',exp:'Zakat wajib yang diberikan pada bulan Ramadhan berupa makanan pokok untuk membersihkan diri.'},
+    {q:'Apa hukum memakan makanan haram?',a:'Dilarang',exp:'Dilarang (haram) dan berdosa besar jika dilakukan.'}
+  ],
+
+  /* --- B A H A S A   I N G G R I S --- */
+  'bahasa-inggris': [
+    {q:'What is the opposite of "big"?',a:'small',exp:'The opposite of big is small.'},
+    {q:'Translate: "Good morning"',a:'Selamat pagi',exp:'Good morning = Selamat pagi'},
+    {q:'How do you spell "book"?',a:'B-O-O-K',exp:'Spell: B-O-O-K'},
+    {q:'What is the color of the sky?',a:'blue',exp:'The sky is blue.'},
+    {q:'Name a day of the week.',a:'Monday',exp:'Example: Monday'},
+    {q:'What is your name?',a:'My name is...',exp:'Answer: My name is [your name].'},
+    {q:'Plural of "child"?',a:'children',exp:'One child – two children'},
+    {q:'Translate: "Thank you"',a:'Terima kasih',exp:'Thank you = Terima kasih'},
+    {q:'What animal says "meow"?',a:'cat',exp:'A cat says meow.'},
+    {q:'Complete: "I ___ a student."',a:'am',exp:'I am a student.'}
+  ],
+
+  /* --- S E N I   R U P A   D A N   P R A K A R Y A --- */
+  'seni-rupa-dan-prakarya': [
+    {q:'Apa yang dimaksud dengan seni rupa?',a:'Karya seni yang dapat dinikmati secara visual dan memiliki bentuk atau wujud',exp:'Karya seni visual yang berbentuk fisik atau digital'},
+    {q:'Sebutkan 3 contoh karya seni rupa dua dimensi!',a:'Lukisan, poster, dan gambar ilustrasi',exp:'Lukisan, poster, dan gambar ilustrasi adalah contoh seni rupa 2D'},
+    {q:'Apa perbedaan seni rupa murni dan terapan?',a:'Seni rupa murni hanya untuk dinikmati keindahannya, sedangkan terapan memiliki fungsi praktis',exp:'Murni: estetik; Terapan: fungsi + estetik'},
+    {q:'Apa yang dimaksud dengan teknik kolase?',a:'Teknik seni dengan menempel berbagai bahan',exp:'Menempel kertas, kain, dll. pada permukaan karya'},
+    {q:'Sebutkan unsur-unsur seni rupa!',a:'Garis, warna, bentuk, tekstur, ruang, dan gelap-terang',exp:'Enam unsur utama dalam karya seni rupa'},
+    {q:'Apa fungsi dari karya kerajinan anyaman?',a:'Sebagai benda hias atau benda pakai',exp:'Anyaman bisa dipakai atau dijadikan ornamen'},
+    {q:'Apa nama alat untuk memotong kertas dalam seni origami?',a:'Gunting atau cutter',exp:'Gunting/cutter untuk memotong kertas origami'},
+    {q:'Sebutkan bahan alami untuk membuat kerajinan!',a:'Bambu, daun pandan, kayu, dan tanah liat',exp:'Bahan-bahan alami yang ramah lingkungan'},
+    {q:'Apa yang dimaksud dengan seni kriya?',a:'Seni kerajinan tangan yang mengutamakan keterampilan dan keindahan',exp:'Kriya = craft + artistry'},
+    {q:'Apa teknik melukis dengan titik-titik kecil?',a:'Pointilisme',exp:'Pointilisme menggunakan titik-titik kecil untuk membentuk gambar'}
+  ],
+
+  /* --- P E N D I D I K A N   P A N C A S I L A --- */
+  'pendidikan-pancasila': [
+    {q:'Apa singkatan dari Pancasila?',a:'Panca = lima, Sila = asas/prinsip',exp:'Pancasila = Lima asas dasar negara Indonesia'},
+    {q:'Sila pertama Pancasila?',a:'Ketuhanan Yang Maha Esa',exp:'Sila 1: Ketuhanan Yang Maha Esa'},
+    {q:'Kapan Pancasila disahkan?',a:'18 Juni 1945',exp:'Disahkan pada Sidang BPUPKI, 18 Juni 1945'},
+    {q:'Siapa yang merumuskan Pancasila?',a:'Ir. Soekarno',exp:'Dr. Ir. Soekarno merumuskan Pancasila'},
+    {q:'Apa makna dari Bhinneka Tunggal Ika?',a:'Berbeda-beda tetapi tetap satu',exp:'Persatuan dalam keberagaman'},
+    {q:'Jumlah sila dalam Pancasila?',a:'5 sila',exp:'Lima sila'},
+    {q:'Apa simbol sila ke-3?',a:'Pohon beringin',exp:'Pohon beringin melambangkan persatuan'},
+    {q:'UUD 1945 merupakan hasil dari sila ke?',a:'Sila ke-4',exp:'Sila ke-4: Kerakyatan yang dipimpin oleh hikmat kebijaksanaan dalam permusyawaratan/perwakilan'},
+    {q:'Apa makna sila ke-2?',a:'Kemanusiaan yang adil dan beradab',exp:'Mengakui persamaan hak dan kewajiban'},
+    {q:'Apa tugas kita terhadap Pancasila?',a:'Menjaga dan mengamalkan nilai-nilainya',exp:'Wajib memelihara serta mengamalkan nilai-nilai Pancasila'}
+  ],
+
+  /* --- I N F O R M A T I K A --- */
+  informatika: [
+    {q:'Apa kepanjangan dari "CPU"?',a:'Central Processing Unit',exp:'CPU adalah otak komputer'},
+    {q:'Jenis memori yang bersifat sementara?',a:'RAM',exp:'Random Access Memory – hilang saat listrik mati'},
+    {q:'Apa fungsi "mouse"?',a:'Untuk menggerakkan kursor',exp:'Mouse berfungsi sebagai pointer'},
+    {q:'Apa singkatan dari "URL"?',a:'Uniform Resource Locator',exp:'URL = alamat situs web'},
+    {q:'Apa bahasa pemrograman yang sering diajarkan di SMP?',a:'Scratch atau Python',exp:'Scratch & Python cocok untuk pemula'},
+    {q:'Apa itu "file"?',a:'Kumpulan data yang disimpan',exp:'File bisa berisi teks, gambar, video'},
+    {q:'Apa fungsi tombol "Ctrl + C"?',a:'Copy (menyalin)',exp:'Ctrl + C untuk menyalin data'},
+    {q:'Apa perbedaan hardware dan software?',a:'Hardware fisik, software program',exp:'Hardware = perangkat; Software = aplikasi'},
+    {q:'Apa nama program pengolah kata?',a:'Microsoft Word / Google Docs',exp:'Untuk mengetik dan mengedit dokumen'},
+    {q:'Apa kepanjangan dari "ISP"?',a:'Internet Service Provider',exp:'ISP penyedia layanan internet'}
+  ]
+};
+
+/* ===== STATE ===== */
+let currentSubject='',currentIndex=0,score=0;
+let snake=[],food={},dir={x:0,y:0},run=false,snakeInterval=null;
+let tttBoard=['','','','','','','','',''],tttPlayer='X';
+let memCards=[],flip=[],match=0;
+
+/* ===== LOCAL STORAGE UTILS ===== */
+const LS = {
+  get:(k,v=0)=>Number(localStorage.getItem(k))||v,
+  set:(k,v)=>localStorage.setItem(k,v),
+  push:(k)=>LS.set(k,LS.get(k)+1),
+  feedback:()=>JSON.parse(localStorage.getItem('feedbacks')||'[]'),
+  addFeedback:(f)=>{const arr=LS.feedback();arr.push(f);localStorage.setItem('feedbacks',JSON.stringify(arr));}
+};
+
+/* ===== NAV ===== */
+function showSection(id){
+  document.querySelectorAll('.content-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(id==='subjects') loadSubjects();
+  if(id==='friends') loadFriends();
+  if(id==='ranking') loadRanking();
+  if(id==='pelajaran') loadPelajaran();
+  if(id==='stats') loadStats();
+  if(id==='contact') loadContact();
+}
+
+/* ===== LOAD UI ===== */
+function loadSubjects(){
+  const grid=document.getElementById('subjects-grid');
+  grid.innerHTML='';
+  Object.keys(questions).forEach(key=>{
+    grid.innerHTML+=`
+      <div class="subject-card" onclick="startQuiz('${key}')">
+        <h3>${key.toUpperCase()}</h3>
+        <p>10 soal latihan</p>
+      </div>`;
+  });
+}
+function loadFriends(){
+  const friends=[
+    {n:'Andika Pratama',a:'🤴',h:'Koding',s:999},
+    {n:'Satrio Alexa Sabandar',a:'🤴',h:'Robotik',s:666},
+    {n:'Naia Anindita',a:'👸',h:'Desain',s:500},
+    {n:'Kenzie Odielray',a:'🤴',h:'Desain',s:300},
+    {n:'Muhammad Dhika Mahesa',a:'🤴',h:'Seni',s:100}
+  ];
+  document.getElementById('friends-grid').innerHTML=friends.map(f=>`
+    <div class="subject-card">
+      <h3>${f.n}</h3>
+      <p>Hobi: ${f.h}</p>
+      <p>Nilai: ${f.s}</p>
+    </div>`).join('');
+}
+function loadRanking(){
+  const friends=[
+    {n:'Andika Pratama',a:'🤴',s:999},
+    {n:'Satrio Alexa Sabandar',a:'🤴',s:666},
+    {n:'Naia Anindita',a:'👸',s:500},
+    {n:'Kenzie Odielray',a:'🤴',s:300},
+    {n:'Muhammad Dhika Mahesa',a:'🤴',s:100}
+  ];
+  document.getElementById('ranking-grid').innerHTML=friends.map(f=>`
+    <div class="subject-card">
+      <div style="font-size:5em">${f.a}</div>
+      <h3>${f.n}</h3>
+      <p>Nilai: ${f.s}</p>
+    </div>`).join('');
+}
+function loadPelajaran(){
+  const subjects=['matematika','bahasa-inggris','bahasa-indonesia','ilmu-pengetahuan-sosial','ilmu-pengetahuan-alam','agama','seni-rupa-dan-prakarya','pendidikan-pancasila','informatika'];
+  document.getElementById('pelajaran-grid').innerHTML=subjects.map(s=>`
+    <div class="subject-card">
+      <h3>${s.replace(/-/g,' ').toUpperCase()}</h3>
+      <button class="nav-btn" onclick="showSection('${s}')">📚 Materi</button>
+    </div>`).join('');
+}
+function loadStats(){
+  LS.push('visitor');
+  document.getElementById('visitor-count').textContent   = LS.get('visitor');
+  document.getElementById('questions-answered').textContent = LS.get('questionsAnswered');
+  document.getElementById('games-played').textContent   = LS.get('gamesPlayed');
+}
+function loadContact(){
+  const friends=[
+    {n:'Class-7D',t:'<li>TikTok:@class7d_smp</li>',i:'<li>Instagram:@class_7d_smpn8tamsel</li>'},
+    {n:'Ketua Kelas: Naia Anindita',t:'<li>TikTok : @naiawww._</li>',i:'<li>Instagram : @nnaai1512</li>'},
+    {n:'Wakil Ketua Kelas: Andika Pratama',t:'<li>TikTok:@zerogravity990',i:'<li>Instagram:@zerogravity120'},
+    {n:'Bendahara: Shintia',t:'<li>TikTok:@withsummerian7</li>',i:'<li>Instagram:@tiayappingmlu</li>'},
+    {n:'Skretaris: Almira Dwi Putri',t:'<li>TikTok:-</li>',i:'<li>Instagram:-</li>'}
+  ];
+  document.getElementById('contact-grid').innerHTML=friends.map(f=>`
+    <div class="subject-card">
+      <h1>${f.n}</h1>
+      <h2>${f.t}</h2>
+      <h2>${f.i}</h2>
+    </div>`).join('');
+}
+
+/* ===== QUIZ 10 SOAL ===== */
+function startQuiz(subject){
+  currentSubject=subject;currentIndex=0;score=0;
+  showSection('practice');showQuestion();
+}
+function showQuestion(){
+  const q=questions[currentSubject][currentIndex];
+  document.getElementById('question-area').innerHTML=`
+    <h3>${currentSubject.toUpperCase()} - Soal ${currentIndex+1}/10</h3>
+    <p><strong>${q.q}</strong></p>
+    <input type="text" id="answer" placeholder="Jawaban Anda">
+    <button onclick="checkAnswer()">Jawab</button>
+    <p id="result"></p>
+  `;
+}
+function checkAnswer(){
+  const val=document.getElementById('answer').value.trim().toLowerCase();
+  const q=questions[currentSubject][currentIndex];
+  const res=document.getElementById('result');
+  if(val===q.a.toLowerCase()){
+    res.textContent='✅ Benar! ' + q.exp; score++;
+  }else{
+    res.textContent='❌ Salah. Jawaban: ' + q.a + ' – ' + q.exp;
+  }
+  setTimeout(()=>{
+    currentIndex++;
+    if(currentIndex<10){
+      showQuestion();
+    }else{
+      LS.push('questionsAnswered');
+      document.getElementById('question-area').innerHTML=`
+        <h3>Selesai! Skor: ${score}/10</h3>
+        <button onclick="startQuiz('${currentSubject}')">Ulangi</button>
+        <button onclick="showSection('subjects')">Pilih Lainnya</button>
+      `;
+    }
+  },1500);
+}
+
+/* ===== GAMES ===== */
+function startGame(type){
+  switch(type){
+    case'snake':snakeGame();break;
+    case'tictactoe':tttGame();break;
+    case'memory':memoryGame();break;
+  }
+}
+function snakeGame(){
+  openModal(`
+    <h2>🐍 Snake 3D</h2>
+    <div class="snake-game" id="snake-board"></div>
+    <button onclick="initSnake()">Start</button>
+    <p>Gunakan panah untuk bergerak</p>
+  `);
+}
+function initSnake(){
+  const b=document.getElementById('snake-board');
+  b.innerHTML='';snake=[{x:10,y:10}];dir={x:0,y:0};run=true;
+  spawnFood();
+  if(snakeInterval) clearInterval(snakeInterval);
+  snakeInterval=setInterval(updateSnake,150);
+}
+function spawnFood(){
+  food={x:Math.floor(Math.random()*21),y:Math.floor(Math.random()*21)};
+}
+function updateSnake(){
+  if(!run)return;
+  const h={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+  if(h.x<0||h.x>20||h.y<0||h.y>20||snake.some(s=>s.x===h.x&&s.y===h.y)){
+    run=false;clearInterval(snakeInterval);
+    alert('Game Over');LS.push('gamesPlayed');loadStats();return;
+  }
+  snake.unshift(h);
+  if(h.x===food.x&&h.y===food.y){spawnFood()}else{snake.pop()}
+  const b=document.getElementById('snake-board');b.innerHTML='';
+  snake.forEach((s,i)=>{
+    const d=document.createElement('div');
+    d.style.background=i===0?'lime':'green';
+    d.style.gridColumn=s.x+1;d.style.gridRow=s.y+1;
+    b.appendChild(d);
+  });
+  const f=document.createElement('div');
+  f.style.background='red';f.style.gridColumn=food.x+1;f.style.gridRow=food.y+1;
+  b.appendChild(f);
+}
+document.addEventListener('keydown',e=>{
+  if(!run)return;
+  switch(e.key){
+    case'ArrowUp':if(dir.y===0)dir={x:0,y:-1};break;
+    case'ArrowDown':if(dir.y===0)dir={x:0,y:1};break;
+    case'ArrowLeft':if(dir.x===0)dir={x:-1,y:0};break;
+    case'ArrowRight':if(dir.x===0)dir={x:1,y:0};break;
+  }
+});
+
+function tttGame(){
+  openModal(`
+    <h2>❌⭕ Tic-Tac-Toe</h2>
+    <div class="tic-tac-toe" id="tic-tac-toe-board">
+      ${Array(9).fill('').map((_,i)=>`<div class="tic-tac-toe-cell" onclick="tttMove(${i})" id="ttt-${i}"></div>`).join('')}
+    </div>
+    <button onclick="resetTTT()">Reset</button>
+  `);
+}
+function tttMove(i){
+  if(tttBoard[i]!=='')return;
+  tttBoard[i]=tttPlayer;
+  document.getElementById('ttt-'+i).textContent=tttPlayer;
+  if(checkTTTWin()){
+    alert(tttPlayer+' menang!');LS.push('gamesPlayed');loadStats();resetTTT();return;
+  }
+  if(tttBoard.every(x=>x!=='')){alert('Seri!');resetTTT();return}
+  tttPlayer=tttPlayer==='X'?'O':'X';
+}
+function checkTTTWin(){
+  const w=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  return w.some(x=>x.every(i=>tttBoard[i]===tttPlayer));
+}
+function resetTTT(){
+  tttBoard=['','','','','','','','',''];tttPlayer='X';
+  document.querySelectorAll('.tic-tac-toe-cell').forEach(c=>c.textContent='');
+}
+
+function memoryGame(){
+  const em=['🎨','🎭','🎪','🎯','🎲','🎮','🎰','🎳','🧩','🎧','🎤','🎸'];
+  memCards=[...em,...em].sort(()=>Math.random()-.5);
+  flip=[];match=0;
+  openModal(`
+    <h2>🧠 Memory 5D</h2>
+    <div class="memory-game">${memCards.map((e,i)=>`<div class="memory-card" onclick="memFlip(${i})" id="mem-${i}">?</div>`).join('')}</div>
+    <button onclick="memoryGame()">Reset</button>
+  `);
+}
+function memFlip(i){
+  const c=document.getElementById('mem-'+i);
+  if(c.textContent!=='?'||flip.length===2)return;
+  c.textContent=memCards[i];c.classList.add('flipped');flip.push(i);
+  if(flip.length===2)setTimeout(checkMemMatch,600);
+}
+function checkMemMatch(){
+  const [a,b]=flip;
+  if(memCards[a]===memCards[b]){
+    document.getElementById('mem-'+a).style.visibility='hidden';
+    document.getElementById('mem-'+b).style.visibility='hidden';
+    match++;if(match===12){alert('Selesai!');LS.push('gamesPlayed');loadStats();}
+  }else{
+    document.getElementById('mem-'+a).textContent='?';document.getElementById('mem-'+a).classList.remove('flipped');
+    document.getElementById('mem-'+b).textContent='?';document.getElementById('mem-'+b).classList.remove('flipped');
+  }
+  flip=[];
+}
+
+/* ===== MODAL ===== */
+function openModal(content){
+  document.getElementById('modal-body').innerHTML=content;
+  document.getElementById('modal').style.display='block';
+}
+function closeModal(){
+  document.getElementById('modal').style.display='none';
+}
+
+/* ===== FEEDBACK ===== */
+function sendFeedback(e){
+  e.preventDefault();
+  const name=document.getElementById('fb-name').value.trim();
+  const text=document.getElementById('fb-text').value.trim();
+  if(!name||!text)return;
+  LS.addFeedback({name, text, date:new Date().toLocaleString('id-ID')});
+  document.getElementById('fb-result').innerHTML=`<p style="color:lime">✅ Terima kasih, ${name}! Feedback Anda telah dikirim.</p>`;
+  document.getElementById('fb-name').value='';
+  document.getElementById('fb-text').value='';
+}
+
+/* ===== INIT ===== */
+window.addEventListener('load',()=>{
+  for(let i=0;i<80;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.left=Math.random()*100+'%';
+    p.style.animationDelay=Math.random()*12+'s';
+    p.style.animationDuration=(8+Math.random()*8)+'s';
+    document.body.appendChild(p);
+  }
+  loadSubjects();
+  loadFriends();
+  loadRanking();
+  loadPelajaran();
+  loadStats();
+  loadContact();
+});
+
+document.getElementById('modal').onclick=e=>{if(e.target.id==='modal')closeModal()};
+</script>
+</body>
+</html>
